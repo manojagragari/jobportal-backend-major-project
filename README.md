@@ -1,4 +1,4 @@
-# 🚀 Django Job Portal / Internship Portal
+# Django Job Portal / Internship Portal
 
 A full-stack Job & Internship Portal built using Django.
 
@@ -8,22 +8,22 @@ Students will learn routing, templates, Bootstrap UI, forms, file uploads, authe
 
 ---
 
-## 📖 Project Overview
+## Project Overview
 
 This portal allows:
 
-- 🏢 Companies to post jobs
-- 📌 Jobs to have status (Open / Closed)
-- 👀 Jobs visible to users
-- 👤 Users to register and login
-- 📝 Users to apply for jobs
-- 📄 Upload CV while applying
-- 📧 Applications sent via email to company
-- ❌ Companies to close/remove jobs
+- Companies to post jobs
+- Jobs to have status (Open / Closed)
+- Jobs visible to users
+- Users to register and login
+- Users to apply for jobs
+- Upload CV while applying
+- Applications sent via email to company
+- Companies to close/remove jobs
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - Python 3
 - Django
