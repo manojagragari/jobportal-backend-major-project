@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Available Jobs</h2>
+
+<div class="row">
+
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Frontend Developer</h5>
+                <p class="card-text">Company: ABC Tech</p>
+                <span class="badge bg-success">Open</span>
+                <br><br>
+                <a href="/application/apply/1/" class="btn btn-outline-primary btn-sm">Apply Now</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">Backend Intern</h5>
+                <p class="card-text">Company: XYZ Solutions</p>
+                <span class="badge bg-success">Open</span>
+                <br><br>
+                <a href="/application/apply/2/" class="btn btn-outline-primary btn-sm">Apply Now</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
