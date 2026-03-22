@@ -30,12 +30,29 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'core:jobs' %}">Jobs</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'users:register' %}">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'users:login' %}">Login</a>
-        </li>
+        {% if user.is_authenticated %}
+          {% if user.is_staff %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'core:job_create' %}">Post Job</a>
+            </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:dashboard' %}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'users:login' %}">Login</a>
+          </li>
+        {% endif %}
         <li class="nav-item ms-3">
             <button id="themeToggle" class="btn btn-outline-light btn-sm">
                 🌙
@@ -49,6 +66,14 @@
 <!-- Main Content -->
 <main class="flex-fill">
     <div class="container mt-5">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
         {% block content %}
         {% endblock %}
     </div>

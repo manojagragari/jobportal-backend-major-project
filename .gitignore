@@ -12,6 +12,9 @@ env/
 # SQLite DB
 db.sqlite3
 
+# Uploaded media
+media/
+
 # macOS
 .DS_Store
 

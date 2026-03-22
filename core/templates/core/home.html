@@ -5,7 +5,27 @@
 <div class="text-center">
     <h1 class="display-4 fw-bold">Find Your Dream Job</h1>
     <p class="lead text-muted">Browse internships and full-time opportunities</p>
-    <a href="/jobs/" class="btn btn-primary btn-lg mt-3">Browse Jobs</a>
+    <a href="{% url 'core:jobs' %}" class="btn btn-primary btn-lg mt-3">Browse Jobs</a>
+</div>
+
+<div class="mt-5">
+    <h3 class="mb-3">Latest Openings</h3>
+    <div class="row">
+        {% for job in featured_jobs %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ job.title }}</h5>
+                        <p class="card-text mb-1"><strong>{{ job.company_name }}</strong></p>
+                        <p class="card-text text-muted">{{ job.location|default:"Location not specified" }}</p>
+                        <a href="{% url 'core:job_detail' job.pk %}" class="btn btn-outline-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted">No jobs posted yet.</p>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">My Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title">My Applications</h5>
+                {% for app in my_applications %}
+                    <div class="border rounded p-2 mb-2">
+                        <div><strong>{{ app.job.title }}</strong> at {{ app.job.company_name }}</div>
+                        <small class="text-muted">Status: {{ app.get_status_display }} | Applied: {{ app.created_at|date:"M d, Y" }}</small>
+                    </div>
+                {% empty %}
+                    <p class="text-muted">You have not applied for any jobs yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title">Jobs Posted By Me</h5>
+                {% if user.is_staff %}
+                    {% for job in my_jobs %}
+                        <div class="border rounded p-2 mb-2">
+                            <div><strong>{{ job.title }}</strong> - {{ job.company_name }}</div>
+                            <small class="text-muted">{{ job.get_status_display }} | {{ job.created_at|date:"M d, Y" }}</small>
+                        </div>
+                    {% empty %}
+                        <p class="text-muted">No jobs posted yet.</p>
+                    {% endfor %}
+                    <a href="{% url 'core:job_create' %}" class="btn btn-outline-primary btn-sm">Post New Job</a>
+                {% else %}
+                    <p class="text-muted">Posting jobs is available for staff/admin users.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

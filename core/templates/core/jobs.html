@@ -4,31 +4,38 @@
 
 <h2 class="mb-4">Available Jobs</h2>
 
+<form method="get" class="row g-2 mb-4">
+    <div class="col-md-10">
+        <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Search by title, company, location, type">
+    </div>
+    <div class="col-md-2 d-grid">
+        <button class="btn btn-dark">Search</button>
+    </div>
+</form>
+
 <div class="row">
-
-    <div class="col-md-4 mb-4">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Frontend Developer</h5>
-                <p class="card-text">Company: ABC Tech</p>
-                <span class="badge bg-success">Open</span>
-                <br><br>
-                <a href="/application/apply/1/" class="btn btn-outline-primary btn-sm">Apply Now</a>
+    {% for job in jobs %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ job.title }}</h5>
+                    <p class="card-text mb-1"><strong>{{ job.company_name }}</strong></p>
+                    <p class="card-text text-muted">{{ job.location|default:"Location not specified" }}</p>
+                    {% if job.status == "open" %}
+                        <span class="badge bg-success">Open</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Closed</span>
+                    {% endif %}
+                    <span class="badge bg-info text-dark">{{ job.get_employment_type_display }}</span>
+                    <div class="mt-3">
+                        <a href="{% url 'core:job_detail' job.pk %}" class="btn btn-outline-primary btn-sm">View Job</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="col-md-4 mb-4">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">Backend Intern</h5>
-                <p class="card-text">Company: XYZ Solutions</p>
-                <span class="badge bg-success">Open</span>
-                <br><br>
-                <a href="/application/apply/2/" class="btn btn-outline-primary btn-sm">Apply Now</a>
-            </div>
-        </div>
-    </div>
+    {% empty %}
+        <p class="text-muted">No jobs found.</p>
+    {% endfor %}
 
 </div>
 
