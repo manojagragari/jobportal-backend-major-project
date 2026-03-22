@@ -1,7 +1,48 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2 class="mb-4">My Dashboard</h2>
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        {% if profile.profile_image %}
+                            <img src="{{ profile.profile_image.url }}" alt="Profile" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                        {% else %}
+                            <div class="rounded-circle bg-secondary d-inline-flex align-items-center justify-content-center" style="width: 150px; height: 150px;">
+                                <span class="text-white">No Photo</span>
+                            </div>
+                        {% endif %}
+                        <div class="mt-2">
+                            <a href="{% url 'users:profile_edit' %}" class="btn btn-outline-primary btn-sm">Edit Profile</a>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <h3>{{ user.get_full_name|default:user.username }}</h3>
+                        <p class="text-muted">@{{ user.username }}</p>
+                        {% if profile.bio %}
+                            <p>{{ profile.bio }}</p>
+                        {% endif %}
+                        <div class="d-flex gap-3 flex-wrap">
+                            {% if profile.role %}
+                                <span><strong>Role:</strong> {{ profile.get_role_display }}</span>
+                            {% endif %}
+                            {% if profile.location %}
+                                <span><strong>Location:</strong> {{ profile.location }}</span>
+                            {% endif %}
+                            {% if profile.phone %}
+                                <span><strong>Phone:</strong> {{ profile.phone }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="mb-4">Dashboard</h2>
 
 <div class="row">
     <div class="col-md-6 mb-4">
